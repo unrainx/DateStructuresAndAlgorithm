@@ -9,6 +9,27 @@ class LinkedList(object):
     def __init__(self, *args, **kwargs):
         self.head = None
         self.length = 0
+        self.__iter = 0
+
+    def __len__(self):
+        return self.length
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.__iter < self.length:
+            i = 0
+            node = self.head
+            ret = None
+            while i <= self.__iter:
+                ret = node.element
+                node = node.next
+                i += 1
+            self.__iter += 1
+            return ret
+        self.__iter = 0
+        raise StopIteration
 
     def empty(self) -> bool:
         return self.head is None
@@ -85,3 +106,28 @@ class LinkedList(object):
         while node is not None:
             print(node.element)
             node = node.next
+
+
+if __name__ == '__main__':
+    link = LinkedList()
+    link.add("fd")
+    link.add("second")
+    link.add("fd")
+    link.add("fd")
+    link.insert(0, "0")
+    print(link.length)
+    link.insert(3, "0")
+    link.insert(3, "0")
+    link.insert(3, "0")
+    link.insert(3, "0")
+    link.insert(3, "0")
+    link.remove(3)
+    link.retrieve()
+    print(link.includes("0"))
+    l = LinkedList()
+    # l.add(1)
+    # l.add(2)
+    # l.add(3)
+    for i in l:
+        print(i)
+
